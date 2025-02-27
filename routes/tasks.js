@@ -1,6 +1,7 @@
 const express = require('express');
 const Task = require('../models/Task');
 const auth = require('../middleware/auth');
+// const authMiddleware = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -27,6 +28,17 @@ router.get('/', auth, async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
+    }
+});
+
+router.delete('/:id', auth, async (req, res) => {
+    try {
+        const task = await Task.findByIdAndDelete(req.params.id);
+        if (!task) return res.status(404).json({ message: "Tarefa não encontrada" });
+
+        res.json({ message: "Tarefa excluída com sucesso" });
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao excluir tarefa" });
     }
 });
 

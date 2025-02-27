@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
         res.status(401).json({ message: "Token inválido." });
     }
 };
-
+// _______________________________________________________________________________________________
 
 // Lê o token JWT do cabeçalho x-auth-token
 // Se válido, libera o acesso à rota

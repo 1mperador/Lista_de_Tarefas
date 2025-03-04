@@ -1,8 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
+const authMiddleware = require('../middleware/auth');
+const { check, validationResult } = require('express-validator');
 
 const router = express.Router();
 
@@ -65,6 +66,15 @@ router.post('/login', [
         res.json({ token });
     } catch (error) {
         res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/profile', authMiddleware, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password'); // Retorna tudo, exceto senha
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar perfil" });
     }
 });
 

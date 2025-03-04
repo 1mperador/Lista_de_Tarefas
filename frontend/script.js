@@ -1,4 +1,29 @@
 let token = "";
+// async function login(event) {
+//     event.preventDefault(); // Impede recarregamento da página
+
+//     const email = document.getElementById("email").value;
+//     const password = document.getElementById("password").value;
+
+//     try {
+//         const response = await fetch("http://localhost:3000/auth/login", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({ email, password })
+//         });
+
+//         const data = await response.json();
+
+//         if (response.ok) {
+//             localStorage.setItem("token", data.token); // Armazena o token
+//             window.location.href = "profile.html"; // Redireciona para o perfil
+//         } else {
+//             alert(data.message || "Erro no login");
+//         }
+//     } catch (error) {
+//         console.error("Erro ao fazer login:", error);
+//     }
+// }
 
 async function login() {
     const email = document.getElementById("email").value;
